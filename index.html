@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>My Electron Video Player - Powered by PLYR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.3/plyr.css"
+        integrity="sha512-VhUW1MevAGHiK4eUQ30YKfhEOSKerSjHhS36HVbs2hXvfg5SnyOqESk3BbrH4887ABFO3/rVApfIvLKf1AmLxw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.3/plyr.js"
+        integrity="sha512-H0HL8RbcV8yX/Cc5XFEr5xVbQH0S3/M9BIz1YA6Ni6+YSuYZa0Cg9DDPSP/RzfshOh2PT4psYlx4a3cTKRuPTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <video id="videoPlayer" class="js-player" controls>
+            <source />
+        </video>
+    </div>
+
+    <script>
+        // Renderer process code
+        window.onload = () => {
+            const { electron } = window;
+
+            let player = null;
+
+            electron.receive('load-video', (filePath) => {
+                const videoPlayer = document.getElementById('videoPlayer');
+                videoPlayer.src = filePath; // video source directly
+
+                if (player === null) {
+                    player = new Plyr(videoPlayer);
+                } else {
+                    player.source = { type: 'video', sources: [{ src: filePath, type: 'video/mp4' }] }; // Update the source plyr
+                }
+
+                player.play();
+            });
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "electron": "^28.2.2",
+    "electron-progressbar": "^2.2.1",
+    "ffmpeg-static-electron": "^2.0.3",
+    "ffprobe-static-electron": "^2.0.2",
+    "fluent-ffmpeg": "^2.1.2",
+    "plyr": "^3.7.8"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^3.2.9"
+  }
+}
